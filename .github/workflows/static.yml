@@ -29,9 +29,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build the project
-        run: |
-        npm install -g @angular/cli
-        ng build --prod --base-href 'https://wagnermarques.github.io/ctrleacessoangularapp'
+        run: npm install -g @angular/cli
+        run: ng build --prod --base-href 'https://wagnermarques.github.io/ctrleacessoangularapp'
         
   deploy:
     needs: [build]

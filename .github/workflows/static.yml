@@ -44,6 +44,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: pwd
+        run: echo $(pwd)
+      - name: check build still exists
+        run: ls -l dist/ctrleacessoangularapp
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Pages
@@ -51,7 +55,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # Upload entire repository
           path: 'dist/ctrleacessoangularapp'
       - name: Deploy to GitHub Pages
         id: deployment

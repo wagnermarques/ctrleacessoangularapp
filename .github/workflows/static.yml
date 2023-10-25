@@ -2,7 +2,6 @@
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
 
@@ -22,8 +21,18 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Build the project
+        run: ng build --prod --base-href 'https://wagnermarques.github.io/ctrleacessoangularapp'
+        
   deploy:
+    needs: [build]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -37,7 +46,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: '.'
+          path: 'dist/ctrleacessoangularapp'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2

@@ -22,6 +22,9 @@ concurrency:
 
 jobs:
   build:
+    environment:
+    name: github-pages
+    url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
@@ -36,14 +39,6 @@ jobs:
         run: npm install -g @angular/cli
       - name: Build the project
         run: ng build --base-href 'https://wagnermarques.github.io/ctrleacessoangularapp'
-        
-  deploy:
-    needs: [build]
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
       - name: pwd
         run: echo $(pwd)
       - name: ls pwd

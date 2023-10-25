@@ -42,7 +42,7 @@ jobs:
       - name: pwd
         run: echo $(pwd)
       - name: ls pwd
-        run: ls pwd
+        run: ls -la
       - name: check build still exists
         run: ls -l dist/ctrleacessoangularapp
       - name: Checkout
